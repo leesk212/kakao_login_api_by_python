@@ -30,20 +30,14 @@ class FormWidget(QWidget):
         print("load_finished")
         page = self.browser.page()
 
-def open_url():
-    try:
-        webbrowser.open('https://klas.kw.ac.kr')
-    except Exception as ex:
-        print(ex)
 class Manager:
     def __init__(self):
         self.window = BrowserWindow()
         self.window.show()
-        open_url()
-        print('a')
 
 if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
     manager = Manager()
-    sys.exit(app.exec_())
+    app.exec_()
+    webbrowser.open('www.naver.com')
