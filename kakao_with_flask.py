@@ -1,8 +1,10 @@
-from flask import Flask, render_template, redirect, url_for,request
+from flask import Flask, render_template, redirect, url_for, request, make_response
 import requests
 import json
+from ast import literal_eval
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
@@ -18,6 +20,7 @@ def index():
     </a>
 </body>
 </html>'''
+
 
 @app.route('/oauth')
 def oauth():
@@ -42,8 +45,35 @@ def oauth():
     url = "https://kapi.kakao.com/v2/user/me"
     response = requests.request("POST", url, headers=headers)
     print("me response: " + response.text)
+    resp = json.loads(json.dumps(response.text, ensure_ascii=False))
+    resp_list = list(map(str, resp.split('"')))
 
-    return response.text
+    resp_list_p = list()
+    for i in range(len(resp_list)):
+        if len(resp_list[i]) > 2:
+            resp_list_p.append(resp_list[i])
+    resp_list = resp_list_p
+
+    nickname = resp_list[resp_list.index('nickname') + 1].replace(" ' ", "")
+    email = resp_list[resp_list.index('email') + 1].replace(" ' ", "")
+    gender = resp_list[resp_list.index('gender') + 1].replace(" ' ", "")
+    birthday = resp_list[resp_list.index('birthday') + 1].replace(" ' ", "")
+    profile_image = resp_list[resp_list.index('profile_image') + 1].replace(" ' ", "")
+
+    return '''<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>index</title>
+    </head>
+    <body>
+        <img src=' ''' + profile_image + ''' '>
+    </body>
+    </html>'''
+
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+#https://dydrlaks.medium.com/flask-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B4%80%EB%A6%AC-rest-api-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-e07ff5aff018
