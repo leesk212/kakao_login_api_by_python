@@ -1,10 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, request, make_response
 import requests
 import json
-from ast import literal_eval
+
+CLIENT_ID = '8d323fc0c13720cda59983912f875316'
+REDIRECT_URL = 'http://localhost:5000/oauth'
+GET_KAKAO_AUTHENTICATION_CODE = 'https://kauth.kakao.com/oauth/authorize?client_id=' + CLIENT_ID + \
+                                '&redirect_uri=' + REDIRECT_URL + '&response_type=code'
 
 app = Flask(__name__)
-
 
 @app.route('/')
 def index():
@@ -15,7 +18,7 @@ def index():
     <title>index</title>
 </head>
 <body>
-    <a href="https://kauth.kakao.com/oauth/authorize?client_id=8d323fc0c13720cda59983912f875316&redirect_uri=http://localhost:5000/oauth&response_type=code">    
+    <a href=" ''' + GET_KAKAO_AUTHENTICATION_CODE + ''' ">
        <img src='https://github.com/leesk212/kakao_login_api_by_python/blob/main/kakao.png?raw=true'>
     </a>
 </body>
@@ -68,12 +71,14 @@ def oauth():
     </head>
     <body>
         <img src=' ''' + profile_image + ''' '>
+        <p>My Name is ''' + nickname + ''' </p>
+        <p>My email is ''' + email + ''' </p>
+        <p>My gender is ''' + gender + ''' </p>
+        <p>My birthday is ''' + birthday + ''' </p>
     </body>
     </html>'''
-
 
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-#https://dydrlaks.medium.com/flask-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B4%80%EB%A6%AC-rest-api-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-e07ff5aff018
+# https://dydrlaks.medium.com/flask-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%82%AC%EC%9A%A9%EC%9E%90%EA%B4%80%EB%A6%AC-rest-api-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0-e07ff5aff018
