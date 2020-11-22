@@ -1,0 +1,87 @@
+정동호오후 7:28
+free -h
+ipcs -m
+정동호오후 7:30
+ipcrm -m 0
+docker system prune
+정동호오후 7:34
+https://docs.google.com/document/d/1TbFbNrZRMcNh4CIItz-AMOPblfDTGSkYoy7CLlZneV0/edit
+정동호오후 7:44
+sudo lsof -i :5432
+sudo service postgresql status
+정동호오후 7:45
+disable
+정동호오후 7:49
+docker exec -it kw_db bash
+service postgresql status
+정동호오후 7:51
+pgadmin
+apt install pgadmin4
+https://docs.google.com/document/d/1TbFbNrZRMcNh4CIItz-AMOPblfDTGSkYoy7CLlZneV0/edit
+나오후 8:01
+http://182.210.119.107/
+id : leekatme
+pw : 1122
+port 1399
+나오후 8:04
+	182.210.119.107
+나오후 8:10
+KLAS 편하게 사용하기 (KLAS Helper)
+#KLAS #클라스 #유캠퍼스 #유캠 #강의계획서 #인증코드 #인강다운 #싸강다운
+
+크롬의 확장 프로그램인 탬퍼몽키를 이용해 KLAS 사이트에 여러 기능을 추가하고 있습니다. 많이 이용해 주세요! (이전 게시글 내용을 정리해서 새로 올린 글입니다.)
+
+
+⚠️ 안내 사항 ⚠️
+- 유저 스크립트 cross-origin 리소스 접근 경고 창이 나올 경우 도메인 항상 허용 버튼을 눌러주세요.
+- 온라인 강의의 동영상 다운로드 기능의 경우 꼭 개인 소장의 용도로만 사용해 주세요. 또한 이 기능으로도 인강을 볼 수 있는데, 이는 출석에 전혀 반영되지 않으므로 주의해 주세요.
+- 2분 쿨타임 제거 기능은 말 그대로 쿨타임만 제거할 뿐, 동시에 여러 콘텐츠 학습이 가능한 것은 아니므로 주의해 주세요.
+- 온라인 강의 동영상 다운로드와 2분 쿨타임 제거 기능은 강의 종합 페이지가 아닌 온라인 강의 콘텐츠 보기 페이지에서 사용하실 수 있습니다.
+- K
+
+✔️ 설치 방법 (주의! 설치와 사용 모두 크롬 브라우저에서 진행해야 합니다.)
+1. https://chrome.google.com/webstore/search/tampermonkey 접속 후 탬퍼몽키 확장 프로그램 설치
+2. https://openuserjs.org/scripts/nbsp1221/KLAS_Helper 접속 후 Install 버튼 클릭
+3. 새로 뜬 탬퍼몽키 창에서 설치를 계속 진행
+4. 설치가 완료되면 자동으로 기능이 적용되니 KLAS 사이트에 접속해서 바로 사용하시면 됩니다.
+나오후 10:27
+https://devtalk.kakao.com/t/user-id/52804
+정동호오후 10:51
+postgres@postgres.com
+1122
+나오후 10:53
+Unable to connect to server:
+
+could not connect to server: Connection refused
+Is the server running on host "localhost" (127.0.0.1) and accepting
+TCP/IP connections on port 5432?
+could not connect to server: Address not available
+Is the server running on host "localhost" (::1) and accepting
+TCP/IP connections on port 5432?
+
+
+0. docker rm $(docker ps -aq) -f (살아있는 docker image를 죽)
+
+1. docker run --rm -d --net kw_db_net -p 5432:5432 --name kw_db kw_db
+
+2. docker run --rm -d --net kw_db_net -p 8080:80 -e "PGADMIN_DEFAULT_EMAIL=postgres@postgres.com" -e "PGADMIN_DEFAULT_PASSWORD=1122" --name pgadmin dpage/pgadmin4
+
+
+pgadmin의 run 하시는 명령어에서 rm 빼시고
+나중에 docker start pgadmin으로 살리시면 되요
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

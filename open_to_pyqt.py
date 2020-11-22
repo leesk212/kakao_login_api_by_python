@@ -12,7 +12,6 @@ class BrowserWindow(QMainWindow):
         self.form_widget = FormWidget(self)
         self.setCentralWidget(self.form_widget)
 
-
 class FormWidget(QWidget):
     def __init__(self, parent):
         super(FormWidget, self).__init__(parent)

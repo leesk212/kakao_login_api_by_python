@@ -41,10 +41,12 @@ def oauth():
     response = requests.request("POST", url, data=payload)
     access_token = json.loads(((response.text).encode('utf-8')))['access_token']
     print("access token: " + access_token)
+
     url = "https://kapi.kakao.com/v1/user/signup"
     headers.update({'Authorization': "Bearer " + access_token})
     response = requests.request("POST", url, headers=headers)
     print("signup response: " + response.text)
+
     url = "https://kapi.kakao.com/v2/user/me"
     response = requests.request("POST", url, headers=headers)
     print("me response: " + response.text)
@@ -57,11 +59,12 @@ def oauth():
             resp_list_p.append(resp_list[i])
     resp_list = resp_list_p
 
+    unique_id = resp_list[0].replace(" : ", "").replace(" ' ", "").replace(" , ", "")
     nickname = resp_list[resp_list.index('nickname') + 1].replace(" ' ", "")
     email = resp_list[resp_list.index('email') + 1].replace(" ' ", "")
     gender = resp_list[resp_list.index('gender') + 1].replace(" ' ", "")
     birthday = resp_list[resp_list.index('birthday') + 1].replace(" ' ", "")
-    profile_image = resp_list[resp_list.index('profile_image') + 1].replace(" ' ", "")
+    profile_image = resp_list[resp_list.index('profile_image_url') + 1].replace(" ' ", "")
 
     return '''<!DOCTYPE html>
     <html lang="en">
@@ -71,6 +74,7 @@ def oauth():
     </head>
     <body>
         <img src=' ''' + profile_image + ''' '>
+        <p>My unique_id is ''' + unique_id + ''' </p>
         <p>My Name is ''' + nickname + ''' </p>
         <p>My email is ''' + email + ''' </p>
         <p>My gender is ''' + gender + ''' </p>
