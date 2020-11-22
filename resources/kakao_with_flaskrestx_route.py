@@ -1,9 +1,10 @@
 from resources import from_postgreSQL as db, kakao_with_flaskrestx as fr
 
+api = fr.Namespace('post', description='Post related operations')
 
-@fr.api.route('/')
+@api.route('/')
 class Post(fr.Resource):
-    @fr.api.expect(fr.post_get_parser)
+    @api.expect(fr.post_get_parser)
     def get(self):
         params = fr.post_get_parser.parse_args()
 

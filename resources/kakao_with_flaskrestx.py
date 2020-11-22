@@ -1,7 +1,5 @@
 from flask_restx import Namespace, Resource, reqparse
 
-api = Namespace('post', description='Post related operations')
-
 # 학생조회
 student_get_parser = reqparse.RequestParser()
 student_get_parser.add_argument('student', type=str)
